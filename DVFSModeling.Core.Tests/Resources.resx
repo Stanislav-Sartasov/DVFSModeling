@@ -124,4 +124,10 @@
   <data name="flappy" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\flappy.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
   </data>
+  <data name="flappy_new" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\flappy_new.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
+  </data>
+  <data name="flappy_new_high" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\flappy_new_high.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
+  </data>
 </root>

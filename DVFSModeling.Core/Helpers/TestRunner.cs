@@ -9,7 +9,7 @@ namespace DVFSModeling.Core.Helpers
 {
     static public class TestRunner
     {
-        public static int NumberOfTests { get; set; } = 50;
+        public static int NumberOfTests { get; set; } = 10;
 
         public static EnergyTestResult RunEnergyTest(IDVFSAlgorithm algorithm, Dictionary<int, double> weights, string trace)
         {
