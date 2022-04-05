@@ -13,11 +13,24 @@
 
         double oldModel = 0;
 
+        int oldDelta = 0;
+
+        double ratio = 0;
+        long betaUpscale = 0;
+
         double upscale;
+
+        Dictionary<int, double> pows = new Dictionary<int, double>();
 
         public SPSATwoTwoPhases(int[] frequencies, long alpha, long beta, long upscale = 1) : base(frequencies, alpha, beta)
         {
             this.upscale = upscale;
+            ratio = (double)alpha / beta;
+            betaUpscale = beta * upscale;
+            for (int i = 0; i < frequencies.Length; i++)
+            {
+                pows[i] = Math.Pow(1.5, i) * FREQUENCY_PENALTY;
+            }
         }
 
         public override int NumberOfObservations => 2;
@@ -28,9 +41,7 @@
 
             if(finalPhase)
             {
-                var delta = 2 * r.Next(2) - 1;
-
-                var result = currentFrequency + (oldModel - model) / beta * alpha * delta;
+                var result = currentFrequency - (model - oldModel) * ratio * oldDelta;
 
                 finalPhase = false;
                 return FindClosestFrequency(result);
@@ -40,9 +51,9 @@
                 finalPhase = true;
                 oldModel = model;
 
-                var deltaForFreq = 2 * r.Next(2) - 1;
+                oldDelta = 2 * r.Next(2) - 1;
 
-                var disturbedFrequency = FindClosestFrequency(currentFrequency + deltaForFreq * upscale * beta);
+                var disturbedFrequency = FindClosestFrequency(currentFrequency + oldDelta * betaUpscale);
                 return disturbedFrequency;
             }
         }
@@ -57,7 +68,7 @@
 
             var index = indices[currentFrequency];
 
-            model += Math.Pow(1.5, index) * FREQUENCY_PENALTY;
+            model += pows[index];
             return model;
         }
     }

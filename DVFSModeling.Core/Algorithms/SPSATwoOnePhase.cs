@@ -22,18 +22,15 @@
         {
             double undisturbedModel = CalculateFunctional(currentFrequency, currentLoad);
 
-            var deltaForFreq = 2 * r.Next(2) - 1;
-
-            var disturbedFrequency = FindClosestFrequency(currentFrequency + deltaForFreq * upscale * beta);
-            var disturbedLoad = currentLoad * disturbedFrequency / currentFrequency;
-
-            double disturbedModel =
-                CalculateFunctional(
-                    FindClosestFrequency(currentFrequency + deltaForFreq * upscale * beta), disturbedLoad);
-
             var delta = 2 * r.Next(2) - 1;
 
-            var result = currentFrequency + (undisturbedModel - disturbedModel) / beta * alpha * delta;
+            var disturbedFrequency = FindClosestFrequency(currentFrequency + delta * upscale * beta);
+            var disturbedLoad = currentLoad * currentFrequency / disturbedFrequency;
+
+            double disturbedModel =
+                CalculateFunctional(disturbedFrequency, disturbedLoad);
+
+            var result = currentFrequency - (disturbedModel - undisturbedModel) / beta * alpha * delta;
 
             return FindClosestFrequency(result);
         }

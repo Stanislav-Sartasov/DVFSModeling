@@ -18,9 +18,9 @@ namespace DVFSModeling.Core.Helpers
 
         public static EnergyTestResult RunEnergyTest(IDVFSAlgorithm algorithm, Dictionary<int, double> weights, StampedLoad[] trace)
         {
-            List<double> energies = new List<double>();
-            List<int> qualitiesWorse = new List<int>();
-            List<int> qualitiesBetter = new List<int>();
+            List<double> energies = new List<double>(NumberOfTests);
+            List<int> qualitiesWorse = new List<int>(NumberOfTests);
+            List<int> qualitiesBetter = new List<int>(NumberOfTests);
 
             for (int i = 0; i < NumberOfTests; i++)
             {
